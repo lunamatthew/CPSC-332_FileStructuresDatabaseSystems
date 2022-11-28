@@ -102,7 +102,7 @@ VALUES ("8:00 AM", "CS 201", 1383, "12:30 PM", 1, 0, 0, 0, 1, 0, 0, 321111235, 5
 
 
 INSERT INTO section(begin_time, classroom, course_number, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, instructor, number_of_seats, section_number)
-VALUES ("11:50 AM", "CS 105", 1391, "2:15 PM", 0, 0, 0, 0, 0, 2, 0, 111111234, 40, 105);
+VALUES ("11:50 AM", "CS 105", 1391, "2:15 PM", 0, 0, 0, 0, 0, 1, 0, 111111234, 40, 105);
 
 
 INSERT INTO section(begin_time, classroom, course_number, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, instructor, number_of_seats, section_number)
@@ -113,87 +113,136 @@ VALUES ("5:50 PM", "MH 302", 2257, "7:30 PM", 1, 0, 1, 0, 0, 0, 0, 111111234, 30
 -- ==================== ENROLLMENT RECORDS ==========================================
 -- Section ID was not consistent with increment, (Possibly caused when updating a record)
 -- so section_id may be different when transferring
+-- (Updated after 11/27/2022, above issues have been rectfied)
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (1, 012345678, "B-");
-
-
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (2, 012345678, "A+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1231, 123, 12345677, "C");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (6, 012345678, "C+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1383, 101, 12345677, "B");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (5, 012345678, "B");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1391, 105, 12345677, "A+");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (6, 012345677, "D");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1266, 113, 12345677, "A-");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (7, 012345677, "C+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (2233, 123, 12345671, "B");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (8, 012345677, "B");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1231, 123, 12345671, "C+");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (1, 012345677, "A");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (2257, 303, 12345671, "D+");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (2, 012345677, "A+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (2233, 124, 12345672, "B+");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (5, 012345676, "A+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1383, 101, 12345672, "A");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (7, 012345676, "B-");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1391, 105, 12345673, "C");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (8, 012345675, "C-");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (2233, 123, 12345674, "B-");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (4, 012345674, "D+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1231, 222, 12345674, "A");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (6, 012345674, "A");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (2257, 303, 12345674, "B+");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (1, 012345673, "B");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1266, 113, 12345674, "A");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (5, 012345673, "A");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (2233, 124, 12345675, "C-");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (7, 012345673, "A+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1231, 222, 12345675, "B+");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (2, 012345672, "C+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1231, 123, 12345676, "B-");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (8, 012345672, "B");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (2233, 123, 12345676, "A+");
 
 
-INSERT INTO enrollment(section_id, student_id, grade)
-VALUES (4, 012345671, "A+");
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (2257, 303, 12345678, "B");
+
+
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1383, 101, 12345678, "A-");
 
 
 -- ==================================================================================
 
+-- =================== (SECTION TABLE) ==============================================
 
+USE Univeristy;
+
+CREATE TABLE section (course_number INT, section_number INT, classroom VARCHAR(32), number_of_seats INT, begin_time VARCHAR(16), end_time VARCHAR(16),
+instructor INT, monday BIT NOT NULL DEFAULT 0, tuesday BIT NOT NULL DEFAULT 0, wednesday BIT NOT NULL DEFAULT 0, thursday BIT NOT NULL DEFAULT 0,
+friday BIT NOT NULL DEFAULT 0, saturday BIT NOT NULL DEFAULT 0, sunday BIT NOT NULL DEFAULT 0, PRIMARY KEY (section_number, course_number) );
+
+
+ALTER TABLE section
+ADD CONSTRAINT fk_course_number FOREIGN KEY (course_number)
+REFERENCES course(course_number) ON DELETE CASCADE
+
+
+ALTER TABLE section
+ADD CONSTRAINT fk_instructor FOREIGN KEY (instructor)
+REFERENCES professor(professor_ssn) ON DELETE CASCADE
+
+
+CREATE UNIQUE INDEX idx_course_number_section_number ON section(course_number, section_number)
+
+
+-- ==================================================================================
+
+-- =================== (ENROLLMENT TABLE) ===========================================
+
+USE University;
+
+CREATE TABLE enrollment (course_number INT, section_number INT, stu_cwid INT, grade VARCHAR(4), PRIMARY KEY (course_number, section_number, stu_cwid));
+
+
+ALTER TABLE enrollment
+ADD CONSTRAINT fk_course_number FOREIGN KEY (course_number, section_number)
+REFERENCES section(course_number, section_number) ON DELETE CASCADE
+
+
+ALTER TABLE enrollment
+ADD CONSTRAINT fk_student_cwid FOREIGN KEY (stu_cwid)
+REFERENCES student(cwid) ON DELETE CASCADE
+
+
+-- ==================================================================================
+
+-- ================= DELETE EXAMPLE (Delete a row) ==================================
+-- This should delete from enrollment table the record where section number = 222
+
+DELETE FROM enrollment WHERE section_number = 222;
+
+-- ==================================================================================
