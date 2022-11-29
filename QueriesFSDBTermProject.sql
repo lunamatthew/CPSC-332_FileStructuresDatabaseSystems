@@ -195,6 +195,10 @@ INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
 VALUES (1383, 101, 12345678, "A-");
 
 
+INSERT INTO enrollment(course_number, section_number, stu_cwid, grade)
+VALUES (1383, 101, 12345673, "A-");
+
+
 -- ==================================================================================
 
 -- =================== (SECTION TABLE) ==============================================
@@ -246,3 +250,21 @@ REFERENCES student(cwid) ON DELETE CASCADE
 DELETE FROM enrollment WHERE section_number = 222;
 
 -- ==================================================================================
+
+-- ================= FOR THE PROFESSORS Section =====================================
+
+-- A.
+SELECT prof.title, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday , sect.begin_time, sect.end_time FROM professor prof, section sect
+WHERE prof.professor_ssn = 111111234
+AND prof.professor_ssn = sect.instructor;
+
+-- B.
+SELECT DISTINCT count(grade) FROM enrollment enroll
+WHERE enroll.course_number = 1231 AND enroll.section_number = 222;
+
+
+-- ==================================================================================
+
+
+
+
