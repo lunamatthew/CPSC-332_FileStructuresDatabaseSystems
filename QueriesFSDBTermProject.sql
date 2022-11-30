@@ -253,6 +253,7 @@ DELETE FROM enrollment WHERE section_number = 222;
 
 -- ================= FOR THE PROFESSORS Section =====================================
 -- (Part B needs revisions)
+-- (Part B should be fixed now!)
 
 -- A.
 SELECT prof.title, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday , sect.begin_time, sect.end_time FROM professor prof, section sect
@@ -260,14 +261,16 @@ WHERE prof.professor_ssn = 111111234
 AND prof.professor_ssn = sect.instructor;
 
 -- B.
-SELECT DISTINCT count(grade) FROM enrollment enroll
-WHERE enroll.course_number = 1231 AND enroll.section_number = 222;
+SELECT DISTINCT grade, count(grade) FROM enrollment enroll
+WHERE enroll.course_number = 1383 AND enroll.section_number = 101
+GROUP BY enroll.grade;
 
 
 -- ==================================================================================
 
 -- =============== FOR THE STUDENTS section =========================================
 -- (This probably needs revisions)
+-- (Tested and works well!)
 
 -- A
 SELECT sect.section_number, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time, count(enroll.stu_cwid) FROM section sect, enrollment enroll
