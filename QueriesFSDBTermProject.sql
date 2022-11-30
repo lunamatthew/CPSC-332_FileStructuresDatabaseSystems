@@ -270,9 +270,10 @@ WHERE enroll.course_number = 1231 AND enroll.section_number = 222;
 -- (This probably needs revisions)
 
 -- A
-SELECT sect.section_number, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time FROM section sect
-AND SELECT count(stu_cwid) FROM enrollment enroll
-WHERE sect.course_number = 1231;
+SELECT sect.section_number, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time, count(enroll.stu_cwid) FROM section sect, enrollment enroll
+WHERE enroll.course_number = 2233 AND sect.course_number = 2233
+AND enroll.course_number = sect.course_number
+GROUP BY sect.section_number;
 
 -- B
 SELECT enroll.course_number, enroll.grade FROM enrollment enroll
