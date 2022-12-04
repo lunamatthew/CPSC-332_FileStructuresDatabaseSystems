@@ -284,5 +284,12 @@ WHERE enroll.stu_cwid = 12345678;
 
 -- =================================================================================
 
+-- ==================== TESTING ====================================================
 
+SELECT cour.course_number, sect.classroom, CAST(sect.monday IN (1) AS UNSIGNED), CAST(sect.tuesday IN (1) AS UNSIGNED), CAST(sect.wednesday IN (1) AS UNSIGNED), CAST(sect.thursday IN (1) AS UNSIGNED), CAST(sect.friday IN (1) AS UNSIGNED), CAST(sect.saturday IN (1) AS UNSIGNED), CAST(sect.sunday IN (1) AS UNSIGNED) , sect.begin_time, sect.end_time FROM professor prof, section sect, course cour
+WHERE prof.professor_ssn = sect.instructor AND cour.course_number = sect.course_number AND prof.professor_ssn= 111111234;
+
+SELECT CAST(monday IN (1) as UNSIGNED) FROM section;
+
+-- ================================================================================
 
