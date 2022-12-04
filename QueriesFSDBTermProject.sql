@@ -309,7 +309,8 @@ if (!$link) {
 
 echo 'Connected successfully<p>';
 
-$query = "SELECT cour.course_title, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time FROM course cour, section sect, professor prof WHERE cour.course_number = sect.course_number AND prof.professor_ssn =" . $_POST["professor_ssn"];
+
+$query = "SELECT cour.course_title, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time FROM course cour, section sect, professor prof WHERE cour.course_number = sect.course_number AND prof.professor_ssn = sect.instructor AND prof.professor_ssn =" . $_POST["professor_ssn"];
 $result = $link->query($query);
 $nor=$result->num_rows;
 for($i=0; $i<$nor; $i++)
