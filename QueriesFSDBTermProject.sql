@@ -293,3 +293,64 @@ SELECT CAST(monday IN (1) as UNSIGNED) FROM section;
 
 -- ================================================================================
 
+-- =================== TESTING 2 ==================================================
+
+<html>
+<body>
+
+<?php
+// username and password need to be replaced by your username and password
+// dbname is the same as your username
+
+$link = mysqli_connect('mariadb', 'cs332g16', 'cHK7FZ21','cs332g16');
+if (!$link) {
+  die('Could not connect: ' . mysql_error());
+  }
+
+echo 'Connected successfully<p>';
+
+$query = "SELECT cour.course_number, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time FROM course cour, section sect WHERE cour.course_number = sect.course_number;";
+$result = $link->query($query);
+$nor=$result->num_rows;
+for($i=0; $i<$nor; $i++)
+{
+$row=$result->fetch_assoc();
+
+printf("Days: ");
+
+if ($row["monday"]) {
+printf("Monday ");
+}
+if ($row["tuesday"]) {
+printf("Tuesday ");
+}
+if ($row["wednesday"]) {
+printf("Wednesday ");
+}
+if ($row["thursday"]) {
+printf("Thursday ");
+}
+if ($row["friday"]) {
+printf("Friday ");
+}
+if ($row["saturday"]) {
+printf("Saturday ");
+}
+if ($row["sunday"]) {
+printf("Sunday");
+}
+
+printf("<br>Begin: %s - End: %s<br><br>", $row["begin_time"], $row["end_time"]);
+}
+
+$result->free_result();
+$link->close();
+
+?>
+
+</body>
+
+</html>
+
+-- =====================================================================
+
