@@ -309,12 +309,14 @@ if (!$link) {
 
 echo 'Connected successfully<p>';
 
-$query = "SELECT cour.course_number, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time FROM course cour, section sect WHERE cour.course_number = sect.course_number;";
+$query = "SELECT cour.course_title, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time FROM course cour, section sect, professor prof WHERE cour.course_number = sect.course_number AND prof.professor_ssn =" . $_POST["professor_ssn"];
 $result = $link->query($query);
 $nor=$result->num_rows;
 for($i=0; $i<$nor; $i++)
 {
 $row=$result->fetch_assoc();
+
+printf("Class Title: %s<br>", $row["course_title"]);
 
 printf("Days: ");
 
@@ -340,7 +342,9 @@ if ($row["sunday"]) {
 printf("Sunday");
 }
 
-printf("<br>Begin: %s - End: %s<br><br>", $row["begin_time"], $row["end_time"]);
+printf("<br>");
+printf("Classroom: %s<br>", $row["classroom"]);
+printf("Begin: %s - End: %s<br><br>", $row["begin_time"], $row["end_time"]);
 }
 
 $result->free_result();
@@ -351,6 +355,7 @@ $link->close();
 </body>
 
 </html>
+
 
 -- =====================================================================
 
