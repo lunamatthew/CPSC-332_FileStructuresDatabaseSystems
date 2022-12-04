@@ -233,7 +233,7 @@ CREATE TABLE enrollment (course_number INT, section_number INT, stu_cwid INT, gr
 
 
 ALTER TABLE enrollment
-ADD CONSTRAINT fk_course_number FOREIGN KEY (course_number, section_number)
+ADD CONSTRAINT fk_enroll_course_number FOREIGN KEY (course_number, section_number)
 REFERENCES section(course_number, section_number) ON DELETE CASCADE
 
 
