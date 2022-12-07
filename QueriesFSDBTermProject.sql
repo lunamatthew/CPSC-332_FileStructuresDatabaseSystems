@@ -427,3 +427,75 @@ $link->close();
 
 -- =========================================================================
 
+-- ================ STUDENT A WORKING ======================================
+
+<html>
+<body>
+
+<?php
+
+$link = mysqli_connect('mariadb', 'cs332g16', 'cHK7FZ21', 'cs332g16');
+if (!$link) {
+        die('Could not connect: ' . mysql_error());
+        }
+echo 'Connected successfully<p>';
+
+$userInput = $_POST["course_number"];
+$query = "SELECT sect.section_number, sect.classroom, sect.monday, sect.tuesday, sect.wednesday, sect.thursday, sect.friday, sect.saturday, sect.sunday, sect.begin_time, sect.end_time, count(enroll.stu_cwid) AS stuCount FROM section sect, enrollment enroll
+WHERE enroll.course_number = sect.course_number AND enroll.section_number = sect.section_number AND enroll.course_number = $userInput GROUP BY sect.section_number;";
+
+$result = $link->query($query);
+$nor=$result->num_rows;
+
+for($i=0; $i<$nor; $i++)
+{
+$row=$result->fetch_assoc();
+
+printf("Section: %s<br>", $row["section_number"]);
+
+printf("Days: ");
+
+
+if ($row["monday"]) {
+printf("Monday ");
+}
+if ($row["tuesday"]) {
+printf("Tuesday ");
+}
+if ($row["wednesday"]) {
+printf("Wednesday ");
+}
+if ($row["thursday"]) {
+printf("Thursday ");
+}
+if ($row["friday"]) {
+printf("Friday ");
+}
+if ($row["saturday"]) {
+printf("Saturday ");
+}
+if ($row["sunday"]) {
+printf("Sunday");
+}
+
+printf("<br>");
+printf("Classroom: %s<br>", $row["classroom"]);
+printf("Begin: %s - End: %s<br>", $row["begin_time"], $row["end_time"]);
+printf("Number of Students enrolled: %s<br><br>", $row["stuCount"]);
+
+}
+
+$result->free_result();
+$link->close();
+
+
+?>
+
+</body>
+
+</html>
+
+-- =============================================================
+
+
+
